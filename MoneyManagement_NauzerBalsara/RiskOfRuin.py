@@ -55,27 +55,30 @@ def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTe
     nrOfRuins = 0
     #run simulation
     for i in range(roundsOfTesting):
-        numberOfTrades = 0
+        
+#USED FOR DEBUG
+        #numberOfTrades = 0
+        #winningTrades=0
+        #losingTrades=0
+        
         totalCapital=k
-        winningTrades=0
-        losingTrades=0
         while ((totalCapital < (100*k)) and (totalCapital > 0) and (numberOfTrades < 100000) ):
-            fraction = random.random()  #!!!DANGER: this returns only numbers in interval [0.0,1.0) and this may have impact on the riskOfRuin calculation
-            
+            fraction = random.random()  #!!!DANGER: this returns only numbers in interval [0.0,1.0) and this may have impact on the riskOfRuin calculation   
 #USED FOR DEBUG
             #print("1============================================")
             #print("fraction="+str(fraction))
             #print("Number of trades: "+str(numberOfTrades))
             
             if ( fraction <= q ):
-                totalCapital = totalCapital - 1
-                losingTrades +=1
-            else:
-                totalCapital = totalCapital + (1 * payoffRatio)
-                winningTrades +=1
-            numberOfTrades += 1
-            
+                totalCapital = totalCapital - 1        
 #USED FOR DEBUG
+                #losingTrades +=1
+                
+            else:
+                totalCapital = totalCapital + (1 * payoffRatio)                  
+#USED FOR DEBUG
+                #winningTrades +=1
+            #numberOfTrades += 1
             #print("2============================================")
         #print("Step:"+str(i))
         #print("p="+str(p))
@@ -90,7 +93,7 @@ def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTe
         
         if totalCapital <= 0 :
             nrOfRuins += 1
-        #used for feedback for user when the program in running
+        #provide feedback for user when the program in running
         print('.'+str(i), end='',sep='',flush=True)
         
 #USED FOR DEBUG
