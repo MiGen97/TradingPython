@@ -8,6 +8,8 @@
 #   Version:        0.2 --- improved the calculation of riscOfRuin                              #
 #   Version:        0.3 --- added the calculation for riscOfRuin when payoffRatio > 2           #
 #   Version:        0.4 --- fixed the calculation for riscOfRuin when payoffRatio > 2           #
+#   Version:        0.5 --- added the posibility to select the number of rounds for calculating #
+#                           the riscOfRuin when payoffRatio > 2                                 #
 #   Inputs:         a.successProbability - the probability for a trade to be successfully       #
 #                   b.payoffRatio - the ration between the possible profit with possible loss   # 
 #                   c.unitsOfCapital - the number of units of capital available for trading     #
@@ -18,7 +20,7 @@
 #################################################################################################
 import random
 
-def calculateRiskOfRuin(successProbability,payoffRatio,unitsOfCapital):
+def calculateRiskOfRuin(successProbability,payoffRatio,unitsOfCapital,roundsOfTesting=100000):
     #asume firsly the riskOfRuin to be 1 (certain)
     riskOfRuin = 1.0
     #translate parameters in mathematical notations
@@ -34,7 +36,7 @@ def calculateRiskOfRuin(successProbability,payoffRatio,unitsOfCapital):
         if( q < 2*p ):
             riskOfRuin = __calculateRiskOfRuinPayoffRationTwo(p,q,k)
     else:
-        riskOfRuin = __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio)
+        riskOfRuin = __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTesting)
     
     #avoid to send a wrong riskOfRuin
     if (riskOfRuin < 0 or riskOfRuin > 1):
@@ -49,10 +51,10 @@ def __calculateRiskOfRuinPayoffRationTwo(p,q,k):
     return ((0.25 + q/p )**0.5 - 0.5) **k
 
 #simulation found at pages 17-20
-def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio):
+def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTesting):
     nrOfRuins = 0
     #run simulation
-    for i in range(100000):
+    for i in range(roundsOfTesting):
         numberOfTrades = 0
         totalCapital=k
         winningTrades=0
@@ -95,5 +97,5 @@ def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio):
         #print(i)
         #print(nrOfRuins/(i+1))
         
-    print("END!")
-    return nrOfRuins/100000
+    print("...END!")
+    return nrOfRuins/roundsOfTesting
