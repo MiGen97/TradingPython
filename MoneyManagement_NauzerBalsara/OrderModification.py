@@ -1,7 +1,7 @@
 #################################################################################################
 #   Author:         Pascu Mihail-Eugen                                                          #
 #   Date&Hour:      25.02.2021 / 11:12PM                                                        #
-#   Purpose:        Function to update the stop loss is the trade goes profitable               #
+#   Purpose:        Function to update the stop loss if the trade goes profitable               #
 #   Documentation:  Nauzer J. Balsara - Money Management Strategies for Future Traders          #
 #                   Chapter 3 Estimating Risk and Reward                                        #
 #   Version:        0.1 --- initial version                                                     #
