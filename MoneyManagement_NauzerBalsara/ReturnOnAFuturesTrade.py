@@ -8,6 +8,10 @@
 #                   0.2 --- added RateOfReturn calculation                                      #
 #                   0.3 --- added AnnualizedRateOfReturn calculation                            #
 #                   0.4 --- improved the readability of the code                                #
+#                   0.5 --- added MonthlyRateOfReturn, WeeklyRateOfReturn,DailyRateOfReturn     #
+#                           calculation functions                                               #
+#                   0.6 --- added ScaledRateOfReturn calculation                                #
+#                   0.7 --- Fixed calculation of rateOfReturn (inversed prices Entry,Exit)      #
 #   Inputs:         a.initialMargin - the margin that is needed at the start of the trade       #
 #                   b.variationMargin - the additional margin that is needed to avoid a margin  #
 #                                       call, it can be 0 if no additional margin is required   #
@@ -20,8 +24,8 @@
 #                   f.priceEntry - the dollar equivalent of the entry price                     #
 #                   g.priceExit - the dollar equivalent of the liquidation price                #
 #   Output:         a.calculateRateOfReturn - returns the rateOfReturn for a realized trade     #
-#                   b.calculateAnnualizedRateOfReturn - returns the rateOfReturn for a realized #
-#                                                       raported to the whole year #
+#                   b.calculateScaledRateOfReturn - returns the rateOfReturn for a realized     #
+#                                                   scaled to a user given period               #
 #################################################################################################
 
 def calculateRateOfReturn(initialMargin,variationMargin,entryPeriod,variationPeriod,exitPeriod,priceEntry,priceExit,interestRate):
@@ -35,8 +39,8 @@ def calculateRateOfReturn(initialMargin,variationMargin,entryPeriod,variationPer
     l = exitPeriod
     v = variationPeriod
     t = entryPeriod
-    Pl = priceEntry
-    Pt = priceExit
+    Pt = priceEntry
+    Pl = priceExit
     i = interestRate
     
     variationTerm = VM/((1+i)**(v-t))
@@ -50,12 +54,58 @@ def calculateRateOfReturn(initialMargin,variationMargin,entryPeriod,variationPer
     rateOfReturn *= 100
     return rateOfReturn
 
-def calculateAnnualizedRateOfReturn(rateOfReturn,entryPeriod,exitPeriod):
+def calculateScaledRateOfReturn(rateOfReturn,entryPeriod,exitPeriod,typeOfPeriod):
+    scaledRateOfReturn = -1
+    if(typeOfPeriod=="annualy"):
+        scaledRateOfReturn = __calculateAnnualizedRateOfReturn(rateOfReturn,entryPeriod,exitPeriod);
+    if(typeOfPeriod=="monthly"):
+        scaledRateOfReturn = __calculateMonthlyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod);   
+    if(typeOfPeriod=="weekly"):
+        scaledRateOfReturn = __calculateWeeklyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod);
+    if(typeOfPeriod=="daily"):
+        scaledRateOfReturn = __calculateDailyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod);
+    return scaledRateOfReturn
+
+def __calculateAnnualizedRateOfReturn(rateOfReturn,entryPeriod,exitPeriod):
     annualizedRateOfReturn = -1
     #convert variables into mathematical parameters
     #help: the formula is at pages 57
     r = rateOfReturn
     l = exitPeriod 
     t = entryPeriod
+    #365 days in a year
     annualizedRateOfReturn = r * 365/(l-t)
     return annualizedRateOfReturn
+
+def __calculateMonthlyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod):
+    monthlyRateOfReturn = -1
+    #convert variables into mathematical parameters
+    #help: the formula is at pages 57
+    r = rateOfReturn
+    l = exitPeriod 
+    t = entryPeriod
+    #30 days on average in a month
+    monthlyRateOfReturn = r * 30/(l-t)
+    return monthlyRateOfReturn
+
+def __calculateWeeklyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod):
+    weeklyRateOfReturn = -1
+    #convert variables into mathematical parameters
+    #help: the formula is at pages 57
+    r = rateOfReturn
+    l = exitPeriod 
+    t = entryPeriod
+    #168 hours in a week
+    weeklyRateOfReturn = r * 168/(l-t)
+    return weeklyRateOfReturn
+
+def __calculateDailyRateOfReturn(rateOfReturn,entryPeriod,exitPeriod):
+    dailyRateOfReturn = -1
+    #convert variables into mathematical parameters
+    #help: the formula is at pages 57
+    r = rateOfReturn
+    l = exitPeriod 
+    t = entryPeriod
+    #1440 minutes in a day
+    dailyRateOfReturn = r * 1440/(l-t)
+    return dailyRateOfReturn
