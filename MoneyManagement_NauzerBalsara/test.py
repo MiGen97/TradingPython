@@ -12,13 +12,13 @@ import ReturnOnAFuturesTrade as roft
 # return on a futures trade
 initialMargin = 2500
 variationMargin = 1000
-entryDay = 0
-variationDay = 5
-exitDay = 15
-priceEntry = 1500 #0.55 (!!!!!nu stiu cum a ajuns la valoarea de 1250 profit, va trebui sa aflu )
-priceExit = 250 #0.56
-interestRate = 0.000164  # (!!!!nici aici nu am inteles cum a ajuns la aceasta valoare )
-rateOfReturn = roft.calculateRateOfReturn(initialMargin,variationMargin,entryDay,variationDay,exitDay,priceEntry,priceExit,interestRate)
+entryPeriod = 0
+variationPeriod = 5
+exitPeriod = 15
+priceEntry = 1500 
+priceExit = 250
+interestRate = 0.000164  #the anual interest rate must be converted in the interst rate of the period that is used day/hour/minute
+rateOfReturn = roft.calculateRateOfReturn(initialMargin,variationMargin,entryPeriod,variationPeriod,exitPeriod,priceEntry,priceExit,interestRate)
 annualyRateOfReturn=roft.calculateScaledRateOfReturn(rateOfReturn,entryDay,exitDay,"annualy")
 monthlyRateOfReturn=roft.calculateScaledRateOfReturn(rateOfReturn,entryDay,exitDay,"monthly")
 weeklyRateOfReturn=roft.calculateScaledRateOfReturn(rateOfReturn,entryDay,exitDay,"weekly")
