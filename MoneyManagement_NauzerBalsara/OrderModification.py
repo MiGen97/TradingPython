@@ -10,5 +10,8 @@
 #################################################################################################
 
 def modifyOrder():
-	#help: pages 50-51 ( the sheet is helpful)
+	#help: pages 50-51 ( the sheet is helpful )
     #modify the stop loss in a whay that the reward risk ratio is kept at a relatively good value
+    #for help with the below steps see: https://tradeciety.com/how-to-manage-risk-as-a-trader-become-a-professional-risk-manager/
+    
+    #Add trailing stop loss
