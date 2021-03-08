@@ -1,6 +1,7 @@
 import RiskOfRuin as ror
 import ReturnOnAFuturesTrade as roft
 import Diversification as div
+
 # # risk of ruin testing
 # successProbability = 0.35
 # payoffRatio = 2.1
