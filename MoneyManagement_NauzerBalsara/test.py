@@ -1,6 +1,7 @@
 import RiskOfRuin as ror
 import ReturnOnAFuturesTrade as roft
 import Diversification as div
+import AssetSelection as assetSel
 
 # # risk of ruin testing
 # successProbability = 0.35
@@ -30,8 +31,15 @@ import Diversification as div
 # print("weekly rate of return = "+str(weeklyRateOfReturn)+"%")
 # print("daily rate of return = "+str(dailyRateOfReturn)+"%")
 
-# volatility of expected returns
-probabilitiesOfOutcomes=[0.3,0.5,0.2]
-anticipatedResults=[-0.25,0.25,0.5]
-expectedVariance= div.calculateVarianceOfExpectedReturns(probabilitiesOfOutcomes,anticipatedResults)
-print("Expected variance is ",expectedVariance)
+# # volatility of expected returns
+# probabilitiesOfOutcomes=[0.3,0.5,0.2]
+# anticipatedResults=[-0.25,0.25,0.5]
+# expectedVariance= div.calculateVarianceOfExpectedReturns(probabilitiesOfOutcomes,anticipatedResults)
+# print("Expected variance is ",expectedVariance)
+
+# # the sharpe ratio
+# accountSize=1000
+# historicReturns=[300,-100,300,300,300,-100,-100,300,-100,-100]
+# riskFreeInterestRate=0.04
+# sharpeRatio= assetSel.calculateSharpeRation(accountSize,historicReturns,riskFreeInterestRate)
+# print("Sharpe ratio is ",sharpeRatio)
