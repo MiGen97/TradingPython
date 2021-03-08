@@ -37,7 +37,7 @@ def calculateVarianceOfExpectedReturns(probabilitiesOfOutcomes,anticipatedResult
     for i in range(3):
         varianceOfExpectedReturns += ((anticipatedResults[i]-overalExpectedReturn)**2) * probabilitiesOfOutcomes[i]
     return varianceOfExpectedReturns
-    
+
 def calculateCovarianceOfHistoricReturnsAcrossTwoCommodities(returnsVectorX,returnsVectorY):
     #the number of elements for lists returnsVectorX and returnsVectorY must be the same
     if(len(returnsVectorX) != len(returnsVectorY)):
@@ -71,4 +71,5 @@ def calculateCovarianceOfExpectedReturnsAcrossTwoCommodities(probabilitiesOfOutc
 
 def calculateCorrelationBetweenTwoCommodities(returnsVectorX,returnsVectorY):
     covariance = calculateCovarianceOfHistoricReturnsAcrossTwoCommodities(returnsVectorX,returnsVectorY)
-    return (covariance/(stdev(returnsVectorX)*stdev(returnsVectorY))
+    return covariance/(stdev(returnsVectorX)*stdev(returnsVectorY))
+    
