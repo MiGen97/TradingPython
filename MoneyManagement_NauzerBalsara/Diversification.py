@@ -10,8 +10,9 @@
 #                   0.4 --- added function for variance of historic returns across commodities  #
 #                           added function for variance of expected returns across commodities  #
 #                   0.5 --- added function for correlation between two commodities calculation  #
-#   Inputs:         a.                                                                          #
-#   Output:                                                                                     #
+#                   0.6 --- fixed minor bugs in code                                            #
+#   Inputs:         n.a.                                                                        #
+#   Output:         n.a.                                                                        #
 #################################################################################################
 
 from statistics import variance 
@@ -47,7 +48,7 @@ def calculateCovarianceOfHistoricReturnsAcrossTwoCommodities(returnsVectorX,retu
     meanY=mean(returnsVectorY)
     for i in range(len(returnsVectorX)):
         covariance += (returnsVectorX[i]-meanX)*(returnsVectorY[i]-meanY)
-    covariance /=len(returnsVectorX)
+    covariance /=(len(returnsVectorX)-1)
     return covariance
 
 def calculateCovarianceOfExpectedReturnsAcrossTwoCommodities(probabilitiesOfOutcomes,anticipatedResultsX,anticipatedResultsY):
@@ -70,6 +71,7 @@ def calculateCovarianceOfExpectedReturnsAcrossTwoCommodities(probabilitiesOfOutc
     return covarianceOfExpectedReturns
 
 def calculateCorrelationBetweenTwoCommodities(returnsVectorX,returnsVectorY):
+    #calculates the correlation factor between two commodities
     covariance = calculateCovarianceOfHistoricReturnsAcrossTwoCommodities(returnsVectorX,returnsVectorY)
     return covariance/(stdev(returnsVectorX)*stdev(returnsVectorY))
     
