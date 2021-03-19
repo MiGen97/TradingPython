@@ -8,11 +8,19 @@ import pandas as pd
 pd.set_option('display.max_columns', 500) # number of columns to be displayed
 pd.set_option('display.width', 1500)      # max table width to display
 
+from MoneyManagement_NauserBalsara import RiskOfRuin as ror
+
 # # display data on the MetaTrader 5 package
 # print("MetaTrader5 package author: ",mt5.__author__)
 # print("MetaTrader5 package version: ",mt5.__version__)
  
-
+# # risk of ruin testing
+successProbability = 0.35
+payoffRatio = 2.1
+unitsOfCapital = 100
+roundsOfTesting=(int)(1000000/unitsOfCapital)
+riskOfRuin=ror.calculateRiskOfRuin(successProbability,payoffRatio,unitsOfCapital,roundsOfTesting)
+print("riskOfRuin="+str(riskOfRuin))
 
 # establish MetaTrader 5 connection
 if not mt5.initialize():
