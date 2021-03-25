@@ -8,7 +8,7 @@ import pandas as pd
 pd.set_option('display.max_columns', 500) # number of columns to be displayed
 pd.set_option('display.width', 1500)      # max table width to display
 
-from MoneyManagement_NauserBalsara import RiskOfRuin as ror
+from MoneyManagement_NauzerBalsara import RiskOfRuin as ror
 
 # # display data on the MetaTrader 5 package
 # print("MetaTrader5 package author: ",mt5.__author__)
