@@ -55,9 +55,9 @@ def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTe
     nrOfRuins = 0
     #run simulation
     for i in range(roundsOfTesting):
-    
-        numberOfTrades = 0
+        
 #USED FOR DEBUG
+        #numberOfTrades = 0
         #winningTrades=0
         #losingTrades=0
         
@@ -75,11 +75,10 @@ def __calculateRiskOfRuinPayoffRationGreaterThanTwo(p,q,k,payoffRatio,roundsOfTe
                 #losingTrades +=1
                 
             else:
-                totalCapital = totalCapital + (1 * payoffRatio)     
-            numberOfTrades += 1
+                totalCapital = totalCapital + (1 * payoffRatio)                  
 #USED FOR DEBUG
                 #winningTrades +=1
-            
+            #numberOfTrades += 1
             #print("2============================================")
         #print("Step:"+str(i))
         #print("p="+str(p))
