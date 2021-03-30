@@ -15,6 +15,8 @@ pd.set_option('display.width', 1500)      # max table width to display
 from statistics import stdev
 import numpy as np
 
+from Indicators import WilliamPercentageRange as WPR
+
 ####################################################
 #Global Variables section#
 ####################################################
@@ -94,7 +96,7 @@ def GetRates():
     print("====================================================================================")
     # get 10 EURUSD D1 bars from the current day
     global rates 
-    rates = mt5.copy_rates_from_pos("EURUSD", mt5.TIMEFRAME_M1, 0, 10)
+    rates = mt5.copy_rates_from_pos("EURUSD", mt5.TIMEFRAME_M1, 0, 20)
     if rates is not None:
         # create DataFrame out of the obtained data
         rates_frame = pd.DataFrame(rates)
@@ -200,7 +202,7 @@ def isNewBar():
     global rates
     
     lastbar=mt5.copy_rates_from_pos("EURUSD", mt5.TIMEFRAME_M1, 0, 1)
-    print(lastbar['time'])
+    #print(lastbar['time'])
     if last_time == 0:
         last_time=lastbar['time']
         return False
@@ -209,6 +211,8 @@ def isNewBar():
         rates=np.append(rates,lastbar)
         return True
     return False
+    
+    
 ####################################################
 #Main section#
 ####################################################
@@ -217,8 +221,7 @@ def isNewBar():
 #Initialization#
 ################
 InitializeTheMoneyBot()
-CalculateMoneyManagementIndicators()
-#CalculateCurrentIndicators()
+#CalculateMoneyManagementIndicators()
 
 ######
 #Loop#
@@ -227,9 +230,16 @@ while 1:
     if isNewBar() :
         print("New bar")
         #Implement the strategy
-    else:
-        print("Old bar")
-        time.sleep(30)
+        positions_total=mt5.positions_total()
+        if positions_total != 0:
+            wpr=WPR.calculate(rates,14)
+            print("wpr={}".format(wpr))
+            input("Asteapta")
+        if positions_total == 0:
+            macd=MACD.calculate(rates,14,24,9)
+    #else:
+        #print("Old bar")
+        #time.sleep(30)
 mt5.shutdown()
 quit()
  
