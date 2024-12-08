@@ -54,7 +54,7 @@ def InitializeMetaTrader5():
         quit()
     #login data
     account=41215438
-    passwd="Fo9D2iXoaKiP"
+    passwd="********"
     tradingServer="AdmiralMarkets-Demo"
     authorized=mt5.login(login=account, password=passwd, server=tradingServer)
     if authorized:
