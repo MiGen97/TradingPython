@@ -53,7 +53,7 @@ def InitializeMetaTrader5():
         print("The initialization of MetaTrader5 failed, error code =",mt5.last_error())
         quit()
     #login data
-    account=41215438
+    account=***********
     passwd="********"
     tradingServer="AdmiralMarkets-Demo"
     authorized=mt5.login(login=account, password=passwd, server=tradingServer)
