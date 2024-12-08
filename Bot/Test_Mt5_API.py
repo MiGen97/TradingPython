@@ -20,8 +20,8 @@ if not mt5.initialize():
  
  
 #login data
-account=41215438
-passwd="Fo9D2iXoaKiP"
+account=**********
+passwd="**********"
 tradingServer="AdmiralMarkets-Demo"
 authorized=mt5.login(login=account, password=passwd, server=tradingServer)
 if authorized:
